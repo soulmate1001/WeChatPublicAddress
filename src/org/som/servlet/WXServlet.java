@@ -49,6 +49,10 @@ public class WXServlet extends HttpServlet {
 	 */
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		//设置请求的字符集和响应的字符集
+		req.setCharacterEncoding("utf8");
+		resp.setCharacterEncoding("utf8");
+		
 		//System.out.println("post");
 		//doGet(req, resp);
 		//调用消息测试代码
@@ -58,6 +62,21 @@ public class WXServlet extends HttpServlet {
 		Map<String,String> requestMap = WXService.parseRequest(req.getInputStream());
 		//打印解析出来返回的消息
 		System.out.println(requestMap);
+		
+		//回复发送过来的消息,使用xml的形式回复,使用微信开发文档复制过来的格式
+		String respXml = "<xml>\r\n" + 
+				"  <ToUserName><![CDATA["+requestMap.get("FromUserName")+"]]></ToUserName>\r\n" + 
+				"  <FromUserName><![CDATA["+requestMap.get("ToUserName")+"]]></FromUserName>\r\n" + 
+				"  <CreateTime>"+ System.currentTimeMillis()/1000+"</CreateTime>\r\n" + 
+				"  <MsgType><![CDATA[text]]></MsgType>\r\n" + 
+				"  <Content><![CDATA[hello!!!]]></Content>\r\n" + 
+				"</xml>";
+		//String respXml = WXService.getResponse(requestMap);
+		System.out.println(respXml);
+		PrintWriter out = resp.getWriter();
+		out.write(respXml);
+		out.flush();
+		out.close();
 	}
 	
 	

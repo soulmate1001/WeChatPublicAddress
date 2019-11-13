@@ -87,4 +87,9 @@ public class WXService {
 		
 		return map;
 	}
+
+	public static String getResponse(Map<String, String> requestMap) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }
