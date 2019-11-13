@@ -2,8 +2,10 @@ package org.som.servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Map;
 
 import javax.servlet.ServletException;
+import javax.servlet.ServletInputStream;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -39,12 +41,41 @@ public class WXServlet extends HttpServlet {
 			System.out.println("接入失败");
 			
 		}
-		System.out.println("doget");
+		//System.out.println("get");
 	}
 	
+	/**
+	 * post请求在微信公众号中用来消息接收和事件推送
+	 */
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		System.out.println("dopost");
+		//System.out.println("post");
 		//doGet(req, resp);
+		//调用消息测试代码
+		//msgTest(req,resp);
+		
+		//处理消息和事件推送
+		Map<String,String> requestMap = WXService.parseRequest(req.getInputStream());
+		//打印解析出来返回的消息
+		System.out.println(requestMap);
+	}
+	
+	
+	/**
+	 * 消息消息接收测试
+	 * @param req
+	 * @param resp
+	 * @throws ServletException
+	 * @throws IOException
+	 */
+	public void msgTest(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException  {
+		ServletInputStream is =  req.getInputStream();
+		byte[] b = new byte[1024];
+		int len;
+		StringBuilder sb = new StringBuilder();
+		while((len =is.read(b))!= -1) {
+			sb.append(new String(b,0,len));
+		}
+		System.out.println(sb.toString());
 	}
 }

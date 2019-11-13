@@ -1,8 +1,19 @@
 package org.som.service;
 
+import java.io.InputStream;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
+
+import org.dom4j.Document;
+import org.dom4j.DocumentException;
+import org.dom4j.Element;
+import org.dom4j.io.SAXReader;
 
 public class WXService {
 	
@@ -58,7 +69,22 @@ public class WXService {
 		
 		
 		return null;
-		
 	}
 
+	public static Map<String, String> parseRequest(InputStream is) {
+		SAXReader reader = new SAXReader();
+		Map<String,String> map = new HashMap<>();
+		try {
+			Document document = reader.read(is);
+			Element root = document.getRootElement();
+			List<Element> elements = root.elements();
+			for(Element e:elements) {
+				map.put(e.getName(),e.getStringValue());
+			}
+		} catch (DocumentException e) {
+			e.printStackTrace();
+		}
+		
+		return map;
+	}
 }

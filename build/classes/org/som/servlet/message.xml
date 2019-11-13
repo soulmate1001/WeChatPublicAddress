@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+	    参数	                          描述
+	ToUserName	       开发者微信号
+	FromUserName    发送方帐号（一个OpenID）
+	CreateTime	       消息创建时间 （整型）
+	MsgType	              消息类型，文本为text
+	Content	              文本消息内容
+	MsgId	              消息id，64位整型
+ -->
+
+<xml>
+	<ToUserName><![CDATA[gh_a36f38df5f0c]]></ToUserName>
+	<FromUserName><![CDATA[o6mghs3ANBOQ4ha1RihKUn0r1PAc]]></FromUserName>
+	<CreateTime>1573613415</CreateTime>
+	<MsgType><![CDATA[text]]></MsgType>
+	<Content><![CDATA[[Facepalm][Facepalm][Facepalm]]]></Content>
+	<MsgId>22528731235066743</MsgId>
+
+	<ToUserName><![CDATA[gh_a36f38df5f0c]]></ToUserName>
+	<FromUserName><![CDATA[o6mghs3ANBOQ4ha1RihKUn0r1PAc]]></FromUserName>
+	<CreateTime>1573613551</CreateTime>
+	<MsgType><![CDATA[text]]></MsgType>
+	<Content><![CDATA[1]]></Content>
+	<MsgId>22528729344564095</MsgId>
+</xml>
+
+
+<!-- 
+dom4j解析xml消息格式解析出来的结果,使用Map
+{
+Content=你好, 
+CreateTime=1573615895, 
+ToUserName=gh_a36f38df5f0c, 
+FromUserName=o6mghs3ANBOQ4ha1RihKUn0r1PAc, 
+MsgType=text, 
+MsgId=22528763380394177
+}
+ -->
